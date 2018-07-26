@@ -1,0 +1,23 @@
+<header class="header">
+  <nav>
+    <div class="nav-wrapper brand-color">
+      <!-- <div> -->
+      <a routerLink="/" class="left brand-logo logo-link">
+        Your-Bookshelf
+      </a>
+
+      <!-- <ul id="nav-mobile" class="header-menu hide-on-med-and-down"> -->
+      <ul id="nav-mobile" class="header-menu">
+      <!-- <ul id="nav-mobile" class="center"> -->
+      <!-- <ul id="nav-mobile" class=""> -->
+        <li>
+          <a routerLink="bookshelves">Bookshelves</a>
+        </li>
+        <li>
+          <a routerLink="library">Library</a>
+        </li>
+      </ul>
+      <app-user-menu *ngIf="currentUser" class="right user-menu"></app-user-menu>
+    </div>
+  </nav>
+</header>

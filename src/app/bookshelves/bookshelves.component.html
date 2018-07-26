@@ -1,0 +1,32 @@
+<div class="container">
+  <!-- <div class="row">
+    <div class="col s12 m12 l6">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search</i>
+          <input #searchBox id="search-box" (input)="search(searchBox.value)">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="search-result">
+    <div *ngFor="let shelf of bookshelves$ | async" class="row">
+      <a routerLink="/bookshelves/{{shelf.owner.bookshelfId}}" class="col s12">
+        <div class="card horizontal">
+          <div class="card-image">
+            <i class="material-icons">account_circle</i>{{shelf.owner.name}}
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p>books count: {{shelf.booksCount}}</p>
+              <p>followers count: 12345</p>
+            </div>
+            <div class="card-action">
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

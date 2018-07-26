@@ -1,0 +1,18 @@
+<div *ngIf="copyCurrentUser" class="container">
+  <h4>Public profile</h4>
+  <form (submit)="updateProfile()" #profileForm="ngForm">
+    <div class="input-field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name"
+        [(ngModel)]="copyCurrentUser.name" #name="ngModel"
+        required maxlength="255">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <ul>
+          <li *ngIf="name.errors.required">Name can't be blank</li>
+          <li *ngIf="name.errors.maxlength">Name is too long (maximum is 255 characters)</li>
+        </ul>
+      </div>
+    </div>
+    <button type="submit" class="btn" [disabled]="(profileForm.invalid && profileForm.dirty) || submitted">Update profile</button>
+  </form>
+</div>

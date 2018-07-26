@@ -1,0 +1,40 @@
+<div *ngIf="book" class="container">
+  <h4>{{book.title}}</h4>
+  <h6>{{book.subtitle}}</h6>
+  <div class="row">
+    <div class="col s6 m4">
+      <img src="{{book.thumbnailUrl}}">
+    </div>
+    <div class="col s6 m8">
+      <div>isbn: {{book.isbn}}</div>
+      <div>authors: {{book.authors?.join(', ')}}</div>
+      <div>publisher: {{book.publisher}}</div>
+      <div>published date: {{book.publishedDate}}</div>
+      <div>page count: {{book.pageCount}}</div>
+      <div>status: {{book.status}}</div>
+    </div>
+  </div>
+  <div>
+    <p>{{book.description}}</p>
+  </div>
+
+  <!-- ログインしている場合に表示する -->
+  <div *ngIf="currentUser">
+    <div *ngIf="book.isUnavailable()">
+      <button class="btn" (click)="request()">Request</button>
+    </div>
+    <div *ngIf="book.isRequested() && currentUser.isAdmin()">
+      <button class="btn" (click)="approve()">Approve</button>
+      <button class="btn" (click)="reject()">Reject</button>
+    </div>
+    <div *ngIf="book.isAvailable()">
+      <button *ngIf="!book.owner && !book.isOwnedByCurrentUser" class="btn" (click)="addBookToBookshelf()">Add to bookshelf</button>
+      <button *ngIf="(!book.owner || book.owner.is(currentUser)) && book.isOwnedByCurrentUser" class="btn" (click)="deleteBookFromBookshelf()">Delete from bookshelf</button>
+    </div>
+  </div>
+
+  <h5><u>Review list</u></h5>
+  <app-review [book]="book" [currentUser]="currentUser"></app-review>
+  
+  <!-- <button class="btn" (click)="goBack()">go back</button> -->
+</div>

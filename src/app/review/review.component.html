@@ -1,0 +1,65 @@
+<div *ngIf="book.isAvailable()">
+  <!-- 誰かの本棚から移動してきた場合 -->
+  <div *ngIf="book.owner && ownerReview">
+    <!-- 自分の本棚から移動してきた場合 -->
+    <div *ngIf="book.owner.is(currentUser)">
+      <form style="display: inline;" (submit)="writeReview()" #reviewForm="ngForm">
+        <div class="input-field">
+          <label for="review_body">Your review</label>
+          <i class="material-icons prefix">rate_review</i>
+          <textarea class="materialize-textarea" id="review_body" name="review_body" [(ngModel)]="ownerReview.body" #reviewBody="ngModel"
+            required maxlength="4096">
+          </textarea>
+          <div *ngIf="reviewForm.invalid && (reviewForm.dirty || reviewForm.touched)" class="alert alert-danger">
+            <ul>
+              <li *ngIf="reviewBody.errors.required">Review body can't be blank</li>
+              <li *ngIf="reviewBody.errors.maxlength">Review body is too long (maximum is 4096 characters)</li>
+            </ul>
+          </div>
+        </div>
+        <!-- <button type="submit" class="btn btn-success" [disabled]="(reviewForm.invalid && reviewForm.dirty) || submitted"> -->
+        <button type="submit" class="btn" [disabled]="reviewForm.invalid || submitted">
+          <span *ngIf="ownerReview.isDoneFirstPost()">Edit</span>
+          <span *ngIf="!ownerReview.isDoneFirstPost()">Post</span>
+          review
+        </button>
+      </form>
+      <button *ngIf="ownerReview.isDoneFirstPost()" [disabled]="submitted" class="btn" (click)="deleteReview()">
+        Delete review
+      </button>
+    </div>
+    <!-- 他ユーザーの本棚から移動してきた場合 -->
+    <div *ngIf="!book.owner.is(currentUser)">
+      <!-- 他ユーザーが本に対してレビューしている場合は、他ユーザーのレビュー内容であることを強調表示するようにしたい -->
+      <div class="card horizontal">
+        <div class="card-image">
+          <a routerLink="/bookshelves/{{book.owner.bookshelfId}}"><i class="material-icons">account_circle</i>{{book.owner.name}}</a>
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p *ngIf="ownerReview.isDoneFirstPost()" [innerHTML]="ownerReview.body | newline"></p>
+            <p *ngIf="!ownerReview.isDoneFirstPost()">{{book.owner.name}} is not posted</p>
+          </div>
+          <div class="card-action">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 本に対するレビューをすべて表示する（ただし、本棚から遷移してきた場合は本棚のオーナーが書いたレビューは表示しない -->
+  <div *ngFor="let review of reviews">
+    <div class="card horizontal">
+      <div class="card-image">
+        <a routerLink="/bookshelves/{{review.writer.bookshelfId}}"><i class="material-icons">account_circle</i>{{review.writer.name}}</a>
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <p [innerHTML]="review.body | newline"></p>
+        </div>
+        <div class="card-action">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

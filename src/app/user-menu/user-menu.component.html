@@ -1,0 +1,11 @@
+<!-- Dropdown Trigger -->
+<a class='dropdown-menu-trigger' data-target='dropdown-menu'>
+  <i class="material-icons">menu</i>
+</a>
+
+<!-- Dropdown Structure -->
+<ul id='dropdown-menu' class='dropdown-content'>
+  <li><a routerLink="/settings"><i class="material-icons">settings</i>Settings</a></li>
+  <li class="divider" tabindex="-1"></li>
+  <li><a routerLink="/" (click)="logout()">Sign out</a></li>
+</ul>

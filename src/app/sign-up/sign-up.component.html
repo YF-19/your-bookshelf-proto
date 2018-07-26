@@ -1,0 +1,48 @@
+<div class="container">
+  <form (submit)="onSubmit()" #signUpForm="ngForm">
+    <div class="row">
+      <div class="input-field col s12">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="signUp.username" #username="ngModel" required maxlength="32"
+          pattern="^[a-zA-Z\d](?:[a-zA-Z\d]|-(?!(?:-|$)))*$">
+        <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+          <ul>
+            <li *ngIf="username.errors.required">Username can't be blank</li>
+            <li *ngIf="username.errors.maxlength">Username is too long (maximum is 32 characters)</li>
+            <li *ngIf="username.errors.pattern">Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="signUp.email" #email="ngModel" required email maxlength="255">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <ul>
+            <li *ngIf="email.errors.required">Email can't be blank</li>
+            <li *ngIf="email.errors.email || email.errors.maxlength">Email is invalid</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="signUp.password" #password="ngModel" required minlength="8"
+          pattern="^[x21-x7E]{0,64}$">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+          <ul>
+            <li *ngIf="password.errors.required">Password can't be blank</li>
+            <li *ngIf="password.errors.minlength">Password is too short (minimum is 8 characters)</li>
+            <li *ngIf="password.errors.pattern">Password is invalid or too long (maximum is 64 characters)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="(signUpForm.invalid && signUpForm.dirty) || submitted">Register</button>
+  </form>
+</div>

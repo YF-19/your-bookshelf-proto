@@ -1,0 +1,27 @@
+#header {
+  background-color: #bebebe;
+}
+
+.logo-link {
+  text-decoration: none;
+}
+
+.logo {
+  font-weight: bold;
+  color: #4ECDC4;
+}
+
+.g-nav a {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.header-menu {
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+}
+
+.user-menu {
+  margin-right: 10px;
+}

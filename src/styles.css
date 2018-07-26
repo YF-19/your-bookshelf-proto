@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css'); */
+
+.brand-color {
+  background-color: #009688 !important;
+}
+
+.book-summary {
+  height: 230px;
+}
+
+.book-summary img {
+  max-height: 175px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0px !important
+}
+
+/* Matelializeのrowはデフォルトでmargin-bottomを持っているのでそれを無効化したいときに使う */
+.row-no-margin-bottom {
+  margin-bottom: 0px !important
+}

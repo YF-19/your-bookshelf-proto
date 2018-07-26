@@ -1,0 +1,5 @@
+<div *ngIf="currentUser" class="container">
+  <h4>Delete account</h4>
+  <p>Once you delete your account, there is no going back. Please be certain.</p>
+  <button class="btn btn-success" (click)="deleteAccount()" [disabled]="submitted">Delete your account</button>
+</div>

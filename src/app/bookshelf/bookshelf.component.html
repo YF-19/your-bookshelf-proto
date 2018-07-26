@@ -1,0 +1,35 @@
+<div *ngIf="bookshelf" class="">
+  <div class="row">
+    <div class="col s3">
+      <div class="center">
+        <i class="large material-icons">account_circle</i>
+      </div>
+      <div class="center">
+        {{bookshelf.owner.name}}<br>
+        @{{bookshelf.owner.username}}<br>
+        <span *ngIf="bookshelf.owner.is(currentUser)">Owner is YOU!</span>
+      </div>
+    </div>
+    <div *ngIf="bookshelf.books" class="col s9">
+      <div *ngFor="let book of bookshelf.books" class="col s12 m6 l4">
+        <div class="card horizontal book-summary">
+          <div class="card-image">
+            <a routerLink="/books/{{book.isbn}}/users/{{bookshelf.owner.id}}">
+              <img src="{{book.thumbnailUrl}}">
+            </a>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <a routerLink="/books/{{book.isbn}}/users/{{bookshelf.owner.id}}">
+                {{book.title}}
+              </a>
+            </div>
+            <div class="card-action">
+              <a routerLink="/books/{{book.isbn}}/users/{{bookshelf.owner.id}}">More info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
