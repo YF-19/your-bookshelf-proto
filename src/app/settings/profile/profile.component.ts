@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.authService.isLoggedIn().subscribe(
-      loggedIn => this.copyCurrentUser = loggedIn ? this.authService.getCurrentUser().clone() as User : null
+      loggedIn => this.copyCurrentUser = loggedIn ? this.authService.getCurrentUser().clone() : null
     );
   }
 

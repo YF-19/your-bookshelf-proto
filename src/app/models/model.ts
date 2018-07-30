@@ -84,8 +84,7 @@ export class Model {
     }
 
     // モデルのディープクローンを生成する
-    clone(filter?: (props: string[]) => string[]): Model {
+    clone<T extends Model>(filter?: (props: string[]) => string[]): T {
         return new (<any>this.constructor)(this.toAttributes({ filter }));
     }
 }
-
