@@ -1,8 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 export class HttpUtil {
-    // static API_BASE_URL = 'http://localhost:3000';
-    static API_BASE_URL = 'https://agile-everglades-18086.herokuapp.com';
+    static API_BASE_URL = environment.apiBaseUri;
 
     static makeHttpOptions(): any {
         const headersObj = Object.assign(
